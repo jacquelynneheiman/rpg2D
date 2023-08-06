@@ -16,6 +16,7 @@ using std::endl;
 class GameObject
 {
 public:
+	std::unique_ptr<Transform> transform;
 	string name;
 	vector<std::unique_ptr<Component>> components;
 	GameObject();

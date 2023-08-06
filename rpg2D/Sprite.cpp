@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include "TextureManager.h"
 
 Sprite::Sprite()
 {
@@ -11,24 +12,24 @@ Sprite::Sprite()
 
 void Sprite::Update(float deltaTime)
 {
-	sprite.setPosition(m_Transform.position);
+	sprite.setPosition(m_Transform->position);
+	sprite.setRotation(m_Transform->rotation.x);
 
 	Component::Update(deltaTime);
+}
+
+void Sprite::LoadTexture(string const& path)
+{
+	sprite.setTexture(TextureManager::GetTexture(path));
+	sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
+}
+
+void Sprite::SetTransform(Transform* transform)
+{
+	m_Transform = transform;
 }
 
 void Sprite::draw(sf::RenderTarget& target, sf::RenderStates state) const
 {
 	target.draw(sprite);
-}
-
-void Sprite::LoadTexture(string path)
-{
-	m_Texture.loadFromFile(path);
-	sprite.setTexture(m_Texture);
-	sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
-}
-
-void Sprite::SetTransform(Transform transform)
-{
-	m_Transform = transform;
 }

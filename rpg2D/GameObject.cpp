@@ -4,8 +4,9 @@ GameObject::GameObject()
 {
 	name = "GameObject";
 
-	AddComponent<Transform>();
 	AddComponent<Sprite>();
+
+	transform = std::make_unique<Transform>(Transform());
 }
 
 void GameObject::Update(float deltaTime)
@@ -18,15 +19,9 @@ void GameObject::Update(float deltaTime)
 			{
 				Sprite* sprite = dynamic_cast<Sprite*>(components[i].get());
 
-				if (sprite != nullptr && sprite != NULL)
+				if (sprite != nullptr)
 				{
-					Transform* transform = dynamic_cast<Transform*>(components[0].get());
-
-					if (transform != nullptr && transform != NULL)
-					{
-						transform->position = Vector2f(960, 540);
-						sprite->SetTransform(*transform);
-					}
+					sprite->SetTransform(transform.get());
 				}
 			}
 
