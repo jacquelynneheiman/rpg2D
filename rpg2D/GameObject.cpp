@@ -3,9 +3,6 @@
 GameObject::GameObject()
 {
 	name = "GameObject";
-
-	AddComponent<Sprite>();
-
 	transform = std::make_unique<Transform>(Transform());
 }
 
@@ -46,12 +43,3 @@ void GameObject::Draw(sf::RenderWindow& gameWindow)
 	}
 }
 
-template <class T>
-void GameObject::AddComponent()
-{
-	T tComponent;
-	std::unique_ptr<T> ptrComponent = std::make_unique<T>(tComponent);
-	components.push_back(std::move(ptrComponent));
-
-	cout << tComponent.name << endl;
-}

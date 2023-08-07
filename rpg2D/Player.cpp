@@ -3,6 +3,19 @@
 Player::Player()
 {
 	transform->position = Vector2f(960, 520);
+
+	AddComponent<Sprite>();
+	AddComponent<Health>();
+}
+
+Player::Player(sf::Vector2u resolution)
+{
+	m_Resolution = resolution;
+	
+	transform->position = Vector2f(960, 520);
+	
+	AddComponent<Sprite>();
+	AddComponent<Health>();
 }
 
 void Player::Update(float deltaTime, sf::Vector2i mousePosition)
@@ -12,7 +25,7 @@ void Player::Update(float deltaTime, sf::Vector2i mousePosition)
 	float magnitude = sqrt((directionToMouse.x * directionToMouse.x) + (directionToMouse.y * directionToMouse.y));
 	directionToMouse = directionToMouse / magnitude;
 
-	float rotation = atan2(directionToMouse.y, directionToMouse.x) * 180 / 3.1415;
+	float rotation = static_cast<float>(atan2(directionToMouse.y, directionToMouse.x) * 180 / 3.1415);
 	transform->rotation.x = rotation;
 
 	if (magnitude >= 0.05f)

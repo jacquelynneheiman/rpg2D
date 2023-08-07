@@ -1,9 +1,10 @@
 #include "Player.h"
-#include "Component.h"
 #include "TextureManager.h"
 #include <SFML/Graphics.hpp>
 
-sf::VideoMode vm(1920, 1080);
+const sf::Vector2u resolution(1920, 1080);
+
+sf::VideoMode vm(resolution.x, resolution.y);
 sf::RenderWindow gameWindow(vm, "Game!!", sf::Style::Fullscreen);
 
 sf::Clock gameClock;
@@ -11,7 +12,7 @@ sf::Clock gameClock;
 int main()
 {
 	TextureManager textureManager;
-	Player player;
+	Player player(resolution);
 
 	while (gameWindow.isOpen())
 	{
